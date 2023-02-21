@@ -33,6 +33,10 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
+import SupportScreen from './screens/SupportScreen';
+import ChatBox from './components/ChatBox';
+import ForgetPasswordScreen from './screens/ForgetPasswordScreen';
+import ResetPasswordScreen from './screens/ResetPasswordScreen';
 
 
 function App() {
@@ -133,6 +137,9 @@ function App() {
                       <LinkContainer to="/admin/users">
                         <NavDropdown.Item>Users</NavDropdown.Item>
                       </LinkContainer>
+                      <LinkContainer to="/admin/support">
+                        <NavDropdown.Item>Support</NavDropdown.Item>
+                      </LinkContainer>
                     </NavDropdown>
                   )}
                 </Nav>
@@ -170,6 +177,15 @@ function App() {
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
+              <Route
+                path="/forget-password"
+                element={<ForgetPasswordScreen />}
+              />
+              <Route
+                path="/reset-password/:token"
+                element={<ResetPasswordScreen />}
+              />
+
               <Route
                 path="/profile"
                 element={
@@ -230,6 +246,14 @@ function App() {
                 }
               ></Route>
               <Route
+                path="/admin/support"
+                element={
+                  <AdminRoute>
+                    <SupportScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
                 path="/admin/product/:id"
                 element={
                   <AdminRoute>
@@ -249,6 +273,7 @@ function App() {
           </Container>
         </main>
         <footer>
+          {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}  
           <div className="text-center">All rights reserved</div>
         </footer>
         </div>
