@@ -1,19 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import socketIOClient from "socket.io-client";
+
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
-import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
+import Badge from "react-bootstrap/Badge";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
-import Alert from "react-bootstrap/Alert";
-import MessageBox from '../components/MessageBox';
+import Button from "react-bootstrap/Button";
 
 const ENDPOINT =
   window.location.host.indexOf("localhost") >= 0
     ? "http://127.0.0.1:5000"
     : window.location.host;
+
 export default function AdminPage() {
   const [selectedUser, setSelectedUser] = useState({});
   const [socket, setSocket] = useState(null);
@@ -21,7 +22,6 @@ export default function AdminPage() {
   const [messageBody, setMessageBody] = useState("");
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
-
   useEffect(() => {
     if (uiMessagesRef.current) {
       uiMessagesRef.current.scrollBy({
@@ -45,6 +45,7 @@ export default function AdminPage() {
           }
         }
       });
+
       socket.on("updateUser", (updatedUser) => {
         const existUser = users.find((user) => user.name === updatedUser.name);
         if (existUser) {
@@ -72,6 +73,7 @@ export default function AdminPage() {
       });
     }
   }, [messages, selectedUser, socket, users]);
+
   const selectUser = (user) => {
     setSelectedUser(user);
     const existUser = users.find((x) => x.name === user.name);
@@ -84,6 +86,7 @@ export default function AdminPage() {
     }
     socket.emit("onUserSelected", user);
   };
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (!messageBody.trim()) {
@@ -93,7 +96,6 @@ export default function AdminPage() {
         ...messages,
         { body: messageBody, from: "Admin", to: selectedUser.name },
       ]);
-      setMessageBody("");
       setTimeout(() => {
         socket.emit("onMessage", {
           body: messageBody,
@@ -101,13 +103,15 @@ export default function AdminPage() {
           to: selectedUser.name,
         });
       }, 1000);
+      setMessageBody("");
     }
   };
+
   return (
     <Row>
       <Col sm={3}>
         {users.filter((x) => x.name !== "Admin").length === 0 && (
-          <MessageBox variant="info">No User Found</MessageBox>
+          <Alert variant="info">No User Found</Alert>
         )}
         <ListGroup>
           {users
@@ -151,7 +155,7 @@ export default function AdminPage() {
       <Col sm={9}>
         <div className="admin">
           {!selectedUser.name ? (
-            <MessageBox variant="info">Select a user to start chat</MessageBox>
+            <Alert variant="info">Select a user to start chat</Alert>
           ) : (
             <div>
               <h2>Chat with {selectedUser.name}</h2>
@@ -173,7 +177,7 @@ export default function AdminPage() {
                       onChange={(e) => setMessageBody(e.target.value)}
                       type="text"
                       placeholder="type message"
-                    />
+                    ></FormControl>
                     <Button type="submit" variant="primary">
                       Send
                     </Button>

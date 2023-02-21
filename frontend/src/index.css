@@ -163,3 +163,7 @@ main {
 .support-users .unread {
   background-color: #f02020;
 }
+
+button.thumbnail {
+  padding: 0;
+}
