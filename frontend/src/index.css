@@ -167,3 +167,9 @@ main {
 button.thumbnail {
   padding: 0;
 }
+
+
+.mdbcontainer {
+  padding-top: 60px;
+
+}

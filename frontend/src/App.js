@@ -21,6 +21,13 @@ import OrderScreen from './screens/OrderScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import Button from 'react-bootstrap/Button';
+import {
+  MDBFooter,
+  MDBContainer,
+  MDBIcon,
+  MDBBtn
+} from 'mdb-react-ui-kit';
+
 import { getError } from './utils';
 import axios from 'axios';
 import SearchBox from './components/SearchBox';
@@ -274,8 +281,56 @@ function App() {
         </main>
         <footer>
           {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}  
-          <div className="text-center">All rights reserved</div>
         </footer>
+        <MDBFooter className='mdbfooter sticky-top bg-dark text-center text-white'>
+      <MDBContainer className='mdbcontainer p-4 pb-0'>
+        <section className='mb-4'>
+        <MDBBtn
+            floating
+            className='m-1 rounded-pill'
+            style={{ backgroundColor: '#3b5998' }}
+            href='https://www.facebook.com/yuyoshop'
+            role='button'
+          >
+            <MDBIcon fab icon='facebook-f' />
+          </MDBBtn>
+
+          <MDBBtn
+            floating
+            className='m-1 rounded-pill'
+            style={{ backgroundColor: '#55acee' }}
+            href='#!'
+            role='button'
+          >
+            <MDBIcon fab icon='twitter' />
+          </MDBBtn>
+
+          <MDBBtn
+            floating
+            className='m-1 rounded-pill'
+            style={{ backgroundColor: '#dd4b39' }}
+            href='#!'
+            role='button'
+          >
+            <MDBIcon fab icon='google' />
+          </MDBBtn>
+
+          <MDBBtn
+            floating
+            className='m-1 rounded-pill'
+            style={{ backgroundColor: '#ac2bac' }}
+            href='https://www.instagram.com/shopyuyo/'
+            role='button'
+          >
+            <MDBIcon fab icon='instagram' />
+          </MDBBtn>
+        </section>
+      </MDBContainer>
+
+      <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+        © 2023 Copyright Urban Yuyo
+      </div>
+    </MDBFooter>
         </div>
     </BrowserRouter>
   );
