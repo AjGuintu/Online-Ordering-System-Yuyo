@@ -44,6 +44,7 @@ import SupportScreen from './screens/SupportScreen';
 import ChatBox from './components/ChatBox';
 import ForgetPasswordScreen from './screens/ForgetPasswordScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
+import logo from './logo.png';
 
 
 function App() {
@@ -85,17 +86,17 @@ function App() {
       >
       <ToastContainer position="bottom-center" limit={1} />
       <header>
-        <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+        <Navbar bg='light' variant='light' expand='lg' collapseOnSelect>
           <Container>
             <Button
               type="button"
-              variant='dark'
+              variant='light'
               onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
             >
               <i className="fas fa-bars"></i>
             </Button>
 
-            <Navbar.Brand href='/'>Yuyo</Navbar.Brand>
+            <Navbar.Brand href='/'>Yuyo <img src={logo} alt="Logo" /></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <SearchBox />
@@ -282,7 +283,7 @@ function App() {
         <footer>
           {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}  
         </footer>
-        <MDBFooter className='mdbfooter sticky-top bg-dark text-center text-white'>
+        <MDBFooter className='mdbfooter sticky-top bg-primary text-center text-white'>
       <MDBContainer className='mdbcontainer p-4 pb-0'>
         <section className='mb-4'>
         <MDBBtn

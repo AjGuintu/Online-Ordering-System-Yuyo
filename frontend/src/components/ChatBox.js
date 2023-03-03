@@ -19,7 +19,7 @@ export default function ChatBox() {
   const [userName, setUserName] = useState("");
   const [messageBody, setMessageBody] = useState("");
   const [messages, setMessages] = useState([
-    { from: "YUYO", body: "Hello there, type (TRACK ORDER:input order number) to Track Order" },
+    { from: "YUYO", body: "Welcome! You may track the progress of your order and address any inquiries you may have." },
   ]);
   useEffect(() => {
     if (uiMessagesRef.current) {

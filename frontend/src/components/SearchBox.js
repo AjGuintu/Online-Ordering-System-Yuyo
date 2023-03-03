@@ -25,7 +25,7 @@ export default function SearchBox() {
           aria-label="Search Products"
           aria-describedby="button-search"
         ></FormControl>
-        <Button className="btn btn-secondary my-2 my-sm-0" type="submit" id="button-search">
+        <Button className="btn btn-secondary my-2 my-sm-0" variant='dark' type="submit" id="button-search">
           <i className="fas fa-search"></i>
         </Button>
       </InputGroup>
