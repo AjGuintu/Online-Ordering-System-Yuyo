@@ -204,11 +204,16 @@ export default function ProductListScreen() {
           <div>
             {[...Array(pages).keys()].map((x) => (
               <Link
-                className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
                 key={x + 1}
                 to={`/admin/products?page=${x + 1}`}
+                className="mx-1"
               >
-                {x + 1}
+                <Button
+                className={x + 1 === Number(page) ? 'btn text-bold' : 'btn'}
+                variant="light"
+                >
+                  {x + 1}
+                </Button>
               </Link>
             ))}
           </div>
