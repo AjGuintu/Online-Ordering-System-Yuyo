@@ -48,6 +48,24 @@ function reducer(state, action) {
         loadingDeliver: false,
         successDeliver: false,
       };
+
+    
+    case 'OUT_FOR_DELIVER_REQUEST':
+      return { ...state, loadingOutForDelivery: true };
+    case 'OUT_FOR_DELIVER_STATUS_REQUEST':
+      return { ...state, loadingOutForDelivery: true };
+    case 'OUT_FOR_DELIVER_STATUS_SUCCESS':
+      return { ...state, loadingOutForDelivery: false };
+    case 'OUT_FOR_DELIVER_SUCCESS':
+      return { ...state, loadingOutForDelivery: false, successOutForDelivery: true };
+    case 'OUT_FOR_DELIVER_FAIL':
+      return { ...state, loadingOutForDelivery: false };
+    case 'OUT_FOR_DELIVER_RESET':
+      return {
+        ...state,
+        loadingOutForDelivery: false,
+        successOutForDelivery: false,
+      };
   
 
     default:
@@ -193,7 +211,6 @@ export default function OrderScreen() {
     }
   }
 
- 
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -221,6 +238,14 @@ export default function OrderScreen() {
                 </MessageBox>
               ) : (
                 <MessageBox variant="danger">Not Delivered</MessageBox>
+              )}
+
+              {order.isPaid ? (
+                <MessageBox variant="success">
+                  Click Track Order/Support in the Homepage to check order updates📦
+                </MessageBox>
+              ) : (
+                <MessageBox variant="danger">Order Updates not available </MessageBox>
               )}
 
               {order.isPaid ? (
@@ -319,7 +344,7 @@ export default function OrderScreen() {
                   </ListGroup.Item>
                 )}
        
-                {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                {userInfo.isAdmin && order.isPaid && !order.isDelivered &&  !order.isOutForDelivery && (
                   <ListGroup.Item>
                     {loadingDeliver && <LoadingBox></LoadingBox>}
                     <div className="d-grid btn group">

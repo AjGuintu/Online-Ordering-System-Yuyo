@@ -119,8 +119,6 @@ orderRouter.get(
     })
   );
 
-  
-
   orderRouter.put(
     '/:id/pay',
     isAuth,
