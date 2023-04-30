@@ -50,6 +50,13 @@ productRouter.put(
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;
       await product.save();
+      
+      for (const index in order.orderItems) {
+        const item = order.orderItems[index];
+        const product = await Product.findById(item.product);
+        product.countInStock -= item.qty;
+        await product.save();
+         }
       res.send({ message: 'Product Updated' });
     } else {
       res.status(404).send({ message: 'Product Not Found' });
